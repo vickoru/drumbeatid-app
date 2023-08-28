@@ -1,12 +1,7 @@
-# from typing import final
 import streamlit as st
 import requests
+import os
 from utilities.dictionary import drummer_dictionaries
-# from wavinfo import WavInfoReader
-# from scipy.io import wavfile
-# from scipy.io.wavfile import read
-#from dotenv import load_dotenv
-#from pydub import AudioSegment
 
 
 
@@ -14,17 +9,17 @@ from utilities.dictionary import drummer_dictionaries
 # url = 'http://api:8000'
 # Example localhost development URL
 # url = "http://localhost:8000"
-url = None
-# url_predict = "http://localhost:8000/predict"
-#url = os.getenv('API_URL')
+# url = None
 
-# Set page tab display
 st.set_page_config(
    page_title="Drumbeat ID Project 🥁",
    page_icon= 'X',
    layout="wide",
    initial_sidebar_state="expanded",
 )
+url_endpoint = st.secrets.SERVICE_URL
+
+# Set page tab display
 
 # Main Text on Homepage
 '''
@@ -55,8 +50,8 @@ if uploaded_wav is not None:
         # except ConnectionError:
         #     st.write('### API is unresponsive or does not exist! 😨 🤖')
 
-        if url: #response.status_code == 200:
-            response = requests.post(url + "/upload_wav",
+        if url_endpoint: #response.status_code == 200:
+            response = requests.post(url=url_endpoint,
                                      files={'wav': audio_bytes}, timeout=60)
             genre = response.json()['genre']
             st.write('### Analysis of Wave-File performed ! 🎉')
@@ -67,7 +62,9 @@ if uploaded_wav is not None:
                     st.write(
                         f"### Not so sure about the style of your drumbeat 😨 🤖")
                     st.write(
-                        f'### It could be _{genre[0].capitalize}_ or _{genre[1].capitalize}_'
+                        f'''
+                        ### It could be _{genre[0].capitalize()}_ or _{genre[1].capitalize()}_
+                        '''
                     )
                     st.image(imageurl, width=300)
                     st.caption(f'### {caption_}', unsafe_allow_html=False)
