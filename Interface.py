@@ -21,6 +21,7 @@ st.set_page_config(
 )
 
 url_endpoint = st.secrets.SERVICE_URL
+# url_endpoint = st.secrets.LOCAL_URL
 
 url_lottie = 'https://lottie.host/72f1c0f8-9dfa-40ce-904a-5048f407cd82/NQDeef2Nnv.json'
 
@@ -89,7 +90,7 @@ if uploaded_wav is not None:
         #     print(response.status_code)
         # except ConnectionError:
         #     st.write('### API is unresponsive or does not exist! 😨 🤖')
-
+        # breakpoint()
         if url_endpoint: #response.status_code == 200:
             response = requests.post(url=url_endpoint,
                                      files={'wav': audio_bytes}, timeout=60)
