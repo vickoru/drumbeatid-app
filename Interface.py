@@ -5,12 +5,6 @@ from streamlit_lottie import st_lottie
 from utilities.dictionary import drummer_dictionaries
 
 
-
-# Example local Docker container URL
-# url = 'http://api:8000'
-# Example localhost development URL
-# url = "http://localhost:8000"
-# url = None
 # Set page tab display
 
 st.set_page_config(
